@@ -20,14 +20,19 @@ This is a Redux Workshop to learn Redux
 
 ## :fuelpump: Installation
 `git clone https://github.com/imranhsayed/redux-workshop`
-`cd redux-workshop'
+
+`cd redux-workshop`
+
 `git checkout branch-name`
+
 `npm install`
 
 ## :zap: Development
 `git checkout branch-name`
+
 `npm run dev`
 
 ## :snowflake: Production
 `git checkout branch-name`
+
 `npm run build`

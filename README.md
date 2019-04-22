@@ -1,10 +1,10 @@
-# :hammer_and_pick: Redux Workshop
+# :hammer_and_pick: :snowboarder: Redux Workshop
 
 This is a Redux Workshop to learn Redux
 
 ### :clipboard: Topics Covered:
 1. Using Redux in isolation ( without React )
-2. Redux Store,
+2. Redux Store
 3. Actions
 4. Action Creators
 5. Reducers

@@ -1,4 +1,4 @@
-# :hammer_and_pick: :snowboarder: Redux Workshop
+# :hammer_and_pick: Redux Workshop :snowboarder:
 
 This is a Redux Workshop to learn Redux
 

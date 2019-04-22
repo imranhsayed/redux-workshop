@@ -18,7 +18,7 @@ This is a Redux Workshop to learn Redux
 4. :school_satchel: [4-asynchronous-actions-with-redux](https://github.com/imranhsayed/redux-workshop/tree/asynchronous-actions-with-redux) Handling asynchronous actions with redux
 5. :school_satchel: [5-redux-with-react](https://github.com/imranhsayed/redux-workshop/tree/redux-with-react) Using Redux store for data in React Components 
 
-## :zap: Installation
+## :fuelpump: Installation
 `git clone https://github.com/imranhsayed/redux-workshop`
 `cd redux-workshop'
 `npm install`

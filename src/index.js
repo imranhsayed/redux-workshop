@@ -1,100 +1,63 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
-/**
- * ReducerUser
- *
- * It takes a state and an action and returns a new state for the store.
- * @param state
- * @param action
- */
-const reducerUser = function ( state = {}, action ) {
+const initialState = {
+	loading: false,
+	loaded: false,
+	posts: [],
+	error: null
+};
+
+const reducer = ( state = initialState, action ) => {
 	switch ( action.type ) {
-		case "USER_NAME": {
-			state = { ...state, name: action.payload };
+		case "FETCH_POSTS_START": {
+			return { ...state, loading: true };
 			break;
 		}
-		case "USER_AGE": {
-			state = { ...state, age: action.payload };
+		case "RECEIVE_POSTS": {
+			return { ...state, loading: false, loaded: true, posts: action.payload };
 			break;
 		}
-		default: state = {...state};
+		case "FETCH_POSTS_ERRORS": {
+			return { ...state, loading: false, error: action.payload }
+			break;
+		}
 	}
+
 	return  state;
 };
 
-/**
- * ReducerJobProfile
- *
- * @param state
- * @param action
- */
-const reducerJobProfile = function ( state = {}, action ) {
-	switch ( action.type ) {
-		case "JOB_DETAIL": {
-			state = { ...state, name: action.payload };
-			break;
-		}
-		default: state = {...state};
-	}
-	return state;
-};
 
-/**
- * Combine the two reducers
- *
- * @type {Reducer<any>}
- */
-const reducers = combineReducers( {
-	userDetails: reducerUser,
-	jobDetails: reducerJobProfile
-} );
+const middleware = applyMiddleware( thunk, logger );
 
 /**
  * Create store using the reducer function added above
  * and pass an initial state.
  */
-const store = createStore( reducers );
+const store = createStore( reducer, middleware );
 
 /**
- * Listen to the store using subscribe
- * When Anything changes to the store. the function inside of it will be called.
- * store.getState() return the current state value.
+ * Action creators
+ * Lets dispatch an action.
+ * Multiple synchronous actions
+ * Instead of passing an object containing type and payload as store.dispatch parameter, we can pass a multiple dispatch functions
  */
-store.subscribe( () => {
-	console.warn( 'My store has changed: State value =', store.getState() );
+store.dispatch( ( dispatch ) => {
+	// First Action Dispatch
+	dispatch( {type: 'LOADING'} );
+
+	fetch('https://jsonplaceholder.typicode.com/posts')
+		.then(response => response.json())
+		.then(jsonData => {
+
+			// Second Action Dispatch
+			dispatch( { type: 'LOADED', payload: jsonData } );
+		})
+		.catch( err => {
+
+			// Third Action Dispatch
+			dispatch( { type: 'ERROR', payload: err } );
+		} )
+
 } );
-
-/**
- * Action Creator: Synchronous Actions
- * Returns an Action Object
- *
- * @return {{payload: string, type: string}}
- */
-function getUserName() {
-	return {
-		type: 'USER_NAME',
-		payload: 'Imran'
-	}
-}
-
-function getUserAge() {
-	return {
-		type: 'USER_AGE',
-		payload: 28
-	}
-}
-
-function getJobDetail() {
-	return {
-		type: 'JOB_DETAIL',
-		payload: 'Web Developer'
-	}
-}
-
-/**
- * Dispatch actions.
- * When the below actions are dispatched store.subscribe will call the method inside of it, for each dispatched action
- */
-store.dispatch( getUserName() );
-store.dispatch( getUserAge() );
-store.dispatch( getJobDetail() );

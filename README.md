@@ -14,7 +14,7 @@ This is a Redux Workshop to learn Redux
 ## :bookmark: Branch Details
 1. :department_store: [1-basic-redux-store](https://github.com/imranhsayed/redux-workshop/tree/basic-redux-store) Basic Redux store without using React. Find all code in src/store.js
 2. :ship: [2-combine-multiple-reducers](https://github.com/imranhsayed/redux-workshop/tree/combine-multiple-reducers) Example for multiple reducers
-3. :rocket: [3-synchronous-actions-with-redux](https://github.com/imranhsayed/redux-workshop/tree/combine-multiple-reducers) Synchronous Actions with Redux
+3. :rocket: [3-synchronous-actions-with-redux](https://github.com/imranhsayed/redux-workshop/tree/synchronous-actions-with-redux) Synchronous Actions
 4. :airplane: [4-asynchronous-actions-with-redux](https://github.com/imranhsayed/redux-workshop/tree/asynchronous-actions-with-redux) Handling asynchronous actions with redux
 5. :anchor: [5-redux-with-react](https://github.com/imranhsayed/redux-workshop/tree/redux-with-react) Using Redux store for data in React Components 
 

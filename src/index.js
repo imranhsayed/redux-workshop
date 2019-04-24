@@ -11,15 +11,15 @@ const initialState = {
 
 const reducer = ( state = initialState, action ) => {
 	switch ( action.type ) {
-		case "FETCH_POSTS_START": {
+		case "LOADING": {
 			return { ...state, loading: true };
 			break;
 		}
-		case "RECEIVE_POSTS": {
+		case "LOADED": {
 			return { ...state, loading: false, loaded: true, posts: action.payload };
 			break;
 		}
-		case "FETCH_POSTS_ERRORS": {
+		case "ERROR": {
 			return { ...state, loading: false, error: action.payload }
 			break;
 		}

@@ -1,27 +1,60 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
 
 /**
- * Create a reducer function.
+ * ReducerUser
+ *
  * It takes a state and an action and returns a new state for the store.
  * @param state
  * @param action
  */
-const reducer = function ( state = ' Sayed', action ) {
-	if ( 'USER_NAME' === action.type ) {
-		return action.payload + state;
-	}
-	if ( 'USER_AGE' === action.type ) {
-		return action.payload + state;
+const reducerUser = function ( state = {}, action ) {
+	switch ( action.type ) {
+		case "USER_NAME": {
+			state = { ...state, name: action.payload };
+			break;
+		}
+		case "USER_AGE": {
+			state = { ...state, age: action.payload };
+			break;
+		}
+		default: state = {...state};
 	}
 	return  state;
 };
 
 /**
+ * ReducerJobProfile
+ *
+ * @param state
+ * @param action
+ */
+const reducerJobProfile = function ( state = {}, action ) {
+	switch ( action.type ) {
+		case "JOB_DETAIL": {
+			state = { ...state, name: action.payload };
+			break;
+		}
+		default: state = {...state};
+	}
+	return state;
+};
+
+/**
+ * Combine the two reducers
+ *
+ * @type {Reducer<any>}
+ */
+const reducers = combineReducers( {
+	userDetails: reducerUser,
+	jobDetails: reducerJobProfile
+} );
+
+/**
  * Create store using the reducer function added above
  * and pass an initial state.
  */
-const store = createStore( reducer );
+const store = createStore( reducers );
 
 /**
  * Listen to the store using subscribe
@@ -45,14 +78,25 @@ function getUserName() {
 	}
 }
 
+function getUserAge() {
+	return {
+		type: 'USER_AGE',
+		payload: 28
+	}
+}
+
+function getJobDetail() {
+	return {
+		type: 'JOB_DETAIL',
+		payload: 'Web Developer'
+	}
+}
+
 /**
- * Lets dispatch an action.
- * When the below action is dispatched store.subscribe will call the method inside of it.
+ * Dispatch actions.
+ * When the below actions are dispatched store.subscribe will call the method inside of it, for each dispatched action
  */
 store.dispatch( getUserName() );
-
-store.dispatch({
-	type: 'USER_AGE',
-	payload: 28
-});
+store.dispatch( getUserAge() );
+store.dispatch( getJobDetail() );
 

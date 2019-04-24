@@ -1,5 +1,4 @@
-import { createStore, combineReducers } from "redux";
-
+import { createStore } from "redux";
 
 /**
  * ReducerUser
@@ -24,37 +23,10 @@ const reducerUser = function ( state = {}, action ) {
 };
 
 /**
- * ReducerJobProfile
- *
- * @param state
- * @param action
- */
-const reducerJobProfile = function ( state = {}, action ) {
-	switch ( action.type ) {
-		case "JOB_DETAIL": {
-			state = { ...state, name: action.payload };
-			break;
-		}
-		default: state = {...state};
-	}
-	return state;
-};
-
-/**
- * Combine the two reducers
- *
- * @type {Reducer<any>}
- */
-const reducers = combineReducers( {
-	userDetails: reducerUser,
-	jobDetails: reducerJobProfile
-} );
-
-/**
  * Create store using the reducer function added above
  * and pass an initial state.
  */
-const store = createStore( reducers );
+const store = createStore( reducerUser );
 
 /**
  * Listen to the store using subscribe
@@ -66,7 +38,7 @@ store.subscribe( () => {
 } );
 
 /**
- * Action Creator
+ * Action Creator: Synchronous Actions
  * Returns an Action Object
  *
  * @return {{payload: string, type: string}}
@@ -85,18 +57,9 @@ function getUserAge() {
 	}
 }
 
-function getJobDetail() {
-	return {
-		type: 'JOB_DETAIL',
-		payload: 'Web Developer'
-	}
-}
-
 /**
  * Dispatch actions.
  * When the below actions are dispatched store.subscribe will call the method inside of it, for each dispatched action
  */
 store.dispatch( getUserName() );
 store.dispatch( getUserAge() );
-store.dispatch( getJobDetail() );
-
